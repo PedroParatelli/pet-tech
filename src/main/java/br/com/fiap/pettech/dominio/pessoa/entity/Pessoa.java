@@ -2,12 +2,11 @@ package br.com.fiap.pettech.dominio.pessoa.entity;
 
 import java.time.LocalDate;
 
+//classe abstrata é classe que nao gera uma instância
 public abstract class Pessoa {
 
     private Long id;
-
     private String nome;
-
     private LocalDate nascimento;
 
     public Pessoa() {

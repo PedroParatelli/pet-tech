@@ -15,7 +15,6 @@ public class PessoaFisicaCollectionRepository {
     static private Set<PessoaFisica> pessoas;
 
     static {
-
         pessoas = new LinkedHashSet<>();
 
         PessoaFisica p1 = new PessoaFisica();
@@ -27,8 +26,8 @@ public class PessoaFisicaCollectionRepository {
         p1.addDependente(dep1);
 
         save(p1);
-
         save(dep1);
+
     }
 
     public Collection<PessoaFisica> findAll() {
@@ -39,11 +38,32 @@ public class PessoaFisicaCollectionRepository {
         return pessoas.stream().filter(p -> p.getId().equals(id)).findFirst();
     }
 
-    public static PessoaFisica save(PessoaFisica p) {
+    public static PessoaFisica save(PessoaFisica p){
         p.setId(pessoas.size() + 1L);
         pessoas.add(p);
         return p;
     }
+
+    //Pode ser que nao tenha nada na colection
+    public Optional<PessoaFisica> update(PessoaFisica pessoaFisica){
+        Optional<PessoaFisica> pessoaASerBuscada = this.findById(pessoaFisica.getId());
+
+        if(pessoaASerBuscada.isPresent()){
+            PessoaFisica pessoa = pessoaASerBuscada.get();
+            pessoa.setCpf(pessoaFisica.getCpf());
+            pessoa.setNome(pessoaFisica.getNome());
+            pessoa.setNascimento(pessoaFisica.getNascimento());
+
+            return Optional.of(pessoa);
+        }
+
+        return Optional.empty();
+    }
+
+    public void delete(Long id) {
+        pessoas.removeIf(p1 -> p1.getId().equals(id));
+    }
+
 
 
 }

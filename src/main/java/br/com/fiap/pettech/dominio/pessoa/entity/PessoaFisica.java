@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Vector;
 
-public class PessoaFisica extends Pessoa {
+public class PessoaFisica extends Pessoa{
 
     private String cpf;
 
@@ -29,9 +29,12 @@ public class PessoaFisica extends Pessoa {
         return this;
     }
 
-    public PessoaFisica addDependente(PessoaFisica p) {
-        //TODO: Não pode ser a mesma pessoa.
-        dependentes.add(p);
+
+    public PessoaFisica addDependente(PessoaFisica p){
+        //TODO: can't be the same person.
+        if (!dependentes.contains(p)) {
+            dependentes.add(p);
+        }
         return this;
     }
 
